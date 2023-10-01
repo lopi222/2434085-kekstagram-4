@@ -1,29 +1,24 @@
 // eslint-disable-next-line no-unused-vars
 function checkStringLength(str, maxLength) {
-  if (str.length <= maxLength) {
-    return true;
-  } else {
-    return false;
-  }
+  return str.length <= maxLength;
 }
-// eslint-disable-next-line no-unused-vars
-const proverka = checkStringLength('проверяемая строка', 20);
 // eslint-disable-next-line no-console
-console.log(proverka);
+console.log(checkStringLength('проверяемая строка'));
 
 function checkPalindrome(str) {
-  const cleanedStr = str.toLowerCase().replace(/[^a-z0-9]/g, '');
-  const reversedStr = cleanedStr.split('').reverse().join('');
+  // Удаляем все пробелы и приводим строку к нижнему регистру
+  str = str.replace(/\s/g, '').toLowerCase();
+  const reversedStr = str.split('').reverse().join('');
 
-  if (cleanedStr === reversedStr) {
+  // Сравниваем исходную строку с перевернутой
+  if  (str === reversedStr)
+  {
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
-const myString = 'А роза упала на лапу Азора';
-const isPalindrome = checkPalindrome(myString);
-
 // eslint-disable-next-line no-console
-console.log(isPalindrome);
+console.log(checkPalindrome('А роза упала на лапу Азора'));
+// eslint-disable-next-line no-console
+console.log(checkPalindrome('топор'));
