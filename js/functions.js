@@ -19,6 +19,4 @@ function checkPalindrome(str) {
 }
 
 // eslint-disable-next-line no-console
-console.log(checkPalindrome('А роза упала на лапу Азора'));
-// eslint-disable-next-line no-console
 console.log(checkPalindrome('топор'));
