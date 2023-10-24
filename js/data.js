@@ -1,10 +1,13 @@
 import { getRandomNumber } from './util.js';
-// eslint-disable-next-line no-unused-vars
-import { descriptions, avatars, messages, names } from './constants.js';
+import {descriptions, avatars, messages, names } from './constants.js';
+
+export function generateDescription() {
+  const randomIndex = getRandomNumber(0, descriptions.length - 1);
+  return descriptions[randomIndex];
+}
 
 // Функция для генерации массива случайных комментариев
-// eslint-disable-next-line no-unused-vars
-function generateCommentsArray() {
+export function generateCommentsArray() {
   const commentsArray = [];
   const numComments = getRandomNumber(0, 30);
 
@@ -17,7 +20,7 @@ function generateCommentsArray() {
 }
 
 // Функция для генерации случайного комментария
-function generateComment() {
+export function generateComment() {
   return {
     id: getRandomNumber(1, 100),
     avatar: avatars[getRandomNumber(0, 5)],
@@ -27,8 +30,7 @@ function generateComment() {
 }
 
 // Функция для генерации случайного имени
-function generateRandomName() {
+export function generateRandomName() {
   const randomIndex = getRandomNumber(0, names.length - 1);
   return names[randomIndex];
 }
-

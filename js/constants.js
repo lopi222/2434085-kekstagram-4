@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-const descriptions = [
+export const descriptions = [
   'Красивый закат на пляже',
   'Горы в тумане',
   'Цветущий вишневый сад',
@@ -8,8 +7,7 @@ const descriptions = [
   'Залитая солнцем луговая поляна'
 ];
 
-// eslint-disable-next-line no-unused-vars
-const avatars = [
+export const avatars = [
   'img/avatar-1.svg',
   'img/avatar-2.svg',
   'img/avatar-3.svg',
@@ -18,8 +16,7 @@ const avatars = [
   'img/avatar-6.svg'
 ];
 
-// eslint-disable-next-line no-unused-vars
-const messages = [
+export const messages = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -28,8 +25,7 @@ const messages = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-// eslint-disable-next-line no-unused-vars
-const names = [
+export const names = [
   'Александр',
   'Екатерина',
   'Иван',
