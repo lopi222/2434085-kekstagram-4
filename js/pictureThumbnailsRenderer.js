@@ -1,4 +1,3 @@
-
 import { generatePhotosArray } from './data.js';
 
 // Функция для создания DOM-элементов изображений
@@ -9,7 +8,7 @@ export const createPictureElement = (pictureData) => {
   pictureClone.querySelector('.picture__img').setAttribute('src', pictureData.url);
   pictureClone.querySelector('.picture__img').setAttribute('alt', pictureData.description);
   pictureClone.querySelector('.picture__likes').textContent = pictureData.likes;
-  pictureClone.querySelector('.picture__comments').textContent = pictureData.comments;
+  pictureClone.querySelector('.picture__comments').textContent = pictureData.comments.length;
 
   return pictureClone;
 };
