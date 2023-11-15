@@ -1,5 +1,15 @@
-import { getRandomNumber } from './util.js';
+import { getRandomNumber } from './until.js';
 import {descriptions, avatars, messages, names } from './constants.js';
+
+export function generatePhotosArray() {
+  return {
+    id: getRandomNumber(1, 100),
+    url: `photos/${getRandomNumber(1, 25)}.jpg`,
+    description: generateDescription(),
+    likes: getRandomNumber(15, 200),
+    comments: generateCommentsArray()
+  };
+}
 
 export function generateDescription() {
   const randomIndex = getRandomNumber(0, descriptions.length - 1);
