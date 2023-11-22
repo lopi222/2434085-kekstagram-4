@@ -1,25 +1,14 @@
-import { getRandomNumber } from './until.js';
+import { getRandomInt } from './until.js';
 import {descriptions, avatars, messages, names } from './constants.js';
 
-export function generatePhotosArray() {
-  return {
-    id: getRandomNumber(1, 100),
-    url: `photos/${getRandomNumber(1, 25)}.jpg`,
-    description: generateDescription(),
-    likes: getRandomNumber(15, 200),
-    comments: generateCommentsArray()
-  };
-}
-
-export function generateDescription() {
-  const randomIndex = getRandomNumber(0, descriptions.length - 1);
+function generateDescription() {
+  const randomIndex = getRandomInt(0, descriptions.length - 1);
   return descriptions[randomIndex];
 }
 
-// Функция для генерации массива случайных комментариев
-export function generateCommentsArray() {
+function generateCommentsArray() {
   const commentsArray = [];
-  const numComments = getRandomNumber(0, 30);
+  const numComments = getRandomInt(0, 30);
 
   for (let i = 1; i <= numComments; i++) {
     const comment = generateComment();
@@ -29,18 +18,26 @@ export function generateCommentsArray() {
   return commentsArray;
 }
 
-// Функция для генерации случайного комментария
-export function generateComment() {
+function generateComment() {
   return {
-    id: getRandomNumber(1, 100),
-    avatar: avatars[getRandomNumber(0, 5)],
-    message: messages[getRandomNumber(0, 5)],
+    id: getRandomInt(1, 100),
+    avatar: avatars[getRandomInt(0, 5)],
+    message: messages[getRandomInt(0, 5)],
     name: generateRandomName()
   };
 }
 
-// Функция для генерации случайного имени
-export function generateRandomName() {
-  const randomIndex = getRandomNumber(0, names.length - 1);
+function generateRandomName() {
+  const randomIndex = getRandomInt(0, names.length - 1);
   return names[randomIndex];
+}
+
+export function generatePhotosArray() {
+  return {
+    id: getRandomInt(1, 100),
+    url: `photos/${getRandomInt(1, 25)}.jpg`,
+    description: generateDescription(),
+    likes: getRandomInt(15, 200),
+    comments: generateCommentsArray()
+  };
 }

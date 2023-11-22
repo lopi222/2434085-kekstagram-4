@@ -1,4 +1,5 @@
-import { generatePhotosArray } from './data.js';
+import {generatePhotosArray} from './data.js';
+import { fullSizePicture } from './pictureThumbnailsRenderer.js';
 
 // Функция для создания DOM-элементов изображений
 export const createPictureElement = (pictureData) => {
@@ -19,10 +20,14 @@ const renderPictures = () => {
 
   picturesData.forEach((data) => {
     const pictureElement = createPictureElement(data);
+    pictureElement.addEventListener('click', () => fullSizePicture(data));
     fragment.appendChild(pictureElement);
   });
 
   document.querySelector('.pictures').appendChild(fragment);
 };
+
+// = Array.from({length: 10}, generatePhotosArray);
+
 
 renderPictures();
