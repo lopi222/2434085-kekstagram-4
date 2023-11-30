@@ -53,4 +53,3 @@ export const fullSizePicture = (picturesData) => {
     document.addEventListener('keydown', onDocumentKeydown);
   });
 };
-//обработчик клика по миниатюрам
