@@ -1,4 +1,5 @@
-import { generatePhotosArray } from './data.js';
+import {generatePhotosArray} from './data.js';
+import { fullSizePicture } from './WindowFull-size.js';
 
 // Функция для создания DOM-элементов изображений
 export const createPictureElement = (pictureData) => {
@@ -13,12 +14,13 @@ export const createPictureElement = (pictureData) => {
   return pictureClone;
 };
 
-const renderPictures = () => {
+export const renderPictures = () => {
   const fragment = new DocumentFragment();
-  const picturesData = generatePhotosArray();
+  const picturesData = Array.from({ length: 25 }, () => generatePhotosArray());
 
   picturesData.forEach((data) => {
     const pictureElement = createPictureElement(data);
+    pictureElement.addEventListener('click', () => fullSizePicture(data));
     fragment.appendChild(pictureElement);
   });
 
