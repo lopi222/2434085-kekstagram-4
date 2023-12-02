@@ -17,13 +17,16 @@ export const fullSizePicture = (picturesData) => {
     commentsLoader.classList.remove('hidden');
 
     //Заполнение контента
+
     bigPictureImg.src = pictureData.url;
     likesCount.textContent = pictureData.likes;
     commentsCount.textContent = pictureData.comments.length;
     socialCaption.textContent = pictureData.description;
 
     socialComments.innerHTML = '';
+
     //Отображение комментариев
+
     const comments = pictureData.comments;
     const commentsChunkSize = 5;
     let visibleComments = 0;
@@ -48,6 +51,7 @@ export const fullSizePicture = (picturesData) => {
       commentCount.textContent = visibleComments;
 
       //Если все комментарии показаны, скрыть кнопку
+
       if (visibleComments >= comments.length) {
         commentsLoader.classList.add('hidden');
         commentsLoader.removeEventListener('click', loadMoreComments);
@@ -59,7 +63,9 @@ export const fullSizePicture = (picturesData) => {
     bigPicture.classList.remove('hidden');
     document.body.classList.add('modal-open');
 
+
     //Закрытие окна
+
     const closeFullSizePicture = () => {
       bigPicture.classList.add('hidden');
       document.body.classList.remove('modal-open');
@@ -67,7 +73,7 @@ export const fullSizePicture = (picturesData) => {
       commentsLoader.removeEventListener('click', loadMoreComments);
     };
 
-    //нажатие клавиши Esc
+    // Нажатие клавиши Esc
     function onDocumentKeydown(evt) {
       if (evt.key === 'Escape') {
         evt.preventDefault();
@@ -75,11 +81,13 @@ export const fullSizePicture = (picturesData) => {
       }
     }
 
+
     //Клик по иконке закрытия
     const closeButton = bigPicture.querySelector('.big-picture__cancel');
     closeButton.addEventListener('click', closeFullSizePicture);
 
     //Обработчик нажатия клавиши Esc
+
     document.addEventListener('keydown', onDocumentKeydown);
   });
 };
