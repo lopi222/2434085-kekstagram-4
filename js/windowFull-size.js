@@ -1,5 +1,48 @@
-//import { renderPhotos } from './pictureThumbnailsRenderer.js';
-//import { generatePhotosArray } from './data.js';
+import { input, imagePreview, effectsPreview, scaleControl, slider, textComment, hashtags, initializeFormValidation }from './truthOrDare.js';
+const formValidation = require('./truthOrDare.js');
+
+// Далее вызываете вашу функцию initializeFormValidation из целевого файла
+formValidation.initializeFormValidation();
+
+
+input.addEventListener('change', () => {
+  const file = input.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    const imageUrl = e.target.result;
+    imagePreview.src = imageUrl;
+    effectsPreview.forEach((preview) => {
+      preview.style.backgroundImage = `url(${imageUrl})`;
+    });
+  };
+
+  reader.readAsDataURL(file);
+
+  // Показываем форму редактирования изображения
+  const overlay = document.querySelector('.img-upload-overlay');
+  overlay.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+});
+
+//зкартие формы
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closeImageEditForm();
+  }
+});
+
+document.querySelector('.img-upload__cancel').addEventListener('click', () => {
+  closeImageEditForm();
+});
+
+function closeImageEditForm() {
+  document.querySelector('.img-upload__overlay').classList.add('hidden');
+  document.body.classList.remove('modal-open');
+}
+
+
+
 export const fullSizePicture = (picturesData) => {
   picturesData.forEach((pictureData) => {
     const bigPicture = document.querySelector('.big-picture');
