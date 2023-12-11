@@ -52,11 +52,13 @@ slider.addEventListener('input', () => {
 
 // Добавление текстового комментария
 textComment.addEventListener('input', () => {
+  // eslint-disable-next-line no-unused-vars
   const comment = textComment.value;
 });
 
 // Добавление хэш-тегов
 hashtags.addEventListener('input', () => {
+  // eslint-disable-next-line no-unused-vars
   const tags = hashtags.value.split(' ');
 });
 
@@ -67,12 +69,6 @@ export function initializeFormValidation() {
 
     imageForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      if (pristine.validate()) {
-        // Отправка данных из формы
-        console.log('Форма заполнена корректно, данные могут быть отправлены');
-      } else {
-        console.log('Форма заполнена некорректно, данные не могут быть отправлены');
-      }
     });
 
     const hashtagsInput = document.getElementById('hashtags');

@@ -1,9 +1,7 @@
-import { input, imagePreview, effectsPreview, scaleControl, slider, textComment, hashtags, initializeFormValidation }from './truthOrDare.js';
-const formValidation = require('./truthOrDare.js');
+import { input, imagePreview, effectsPreview, initializeFormValidation}from './truthOrDare.js';
 
-// Далее вызываете вашу функцию initializeFormValidation из целевого файла
-formValidation.initializeFormValidation();
-
+//вызыв функции initializeFormValidation из файла
+initializeFormValidation();
 
 input.addEventListener('change', () => {
   const file = input.files[0];
@@ -40,7 +38,6 @@ function closeImageEditForm() {
   document.querySelector('.img-upload__overlay').classList.add('hidden');
   document.body.classList.remove('modal-open');
 }
-
 
 
 export const fullSizePicture = (picturesData) => {
