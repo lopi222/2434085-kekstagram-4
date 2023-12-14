@@ -1,10 +1,10 @@
-const input = document.querySelector('.img-uploadinput');
-const imagePreview = document.querySelector('.img-uploadpreview img');
-const effectsPreview = document.querySelectorAll('.effectspreview');
-const scaleControl = document.querySelector('.scalecontrol');
-const slider = document.querySelector('.effect-levelslider');
-const textComment = document.querySelector('.text-comment');
-const hashtags = document.querySelector('.hashtags');
+const input = document.querySelector('.img-upload');
+const imagePreview = document.querySelector('.img-upload__preview');
+const effectsPreview = document.querySelectorAll('.img-upload__effects');
+const scaleControl = document.querySelector('.img-upload__scale');
+const slider = document.querySelector('.effect-level__value');
+const textComment = document.querySelector('.text__description');
+const hashtags = document.querySelector('.text__hashtags');
 
 input.addEventListener('change', () => {
   const file = input.files0;
