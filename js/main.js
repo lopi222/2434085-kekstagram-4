@@ -1,5 +1,3 @@
-//import { generatePhotosArray } from './data.js';
-//import { createPictureElement } from './pictureThumbnailsRenderer.js';
 import { renderPictures } from './pictureThumbnailsRenderer.js';
 
 const photos = renderPictures();
