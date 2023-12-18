@@ -85,3 +85,90 @@ export function initializeFormValidation() {
 }
 
 export { input, imagePreview, effectsPreview, scaleControl, slider, textComment, hashtags };
+
+// редактировать масштаб изображения
+let currentValue = 100;
+const step = 25;
+const valueField = document.querySelector('.scale__control--value');
+const previewImage = document.querySelector('.img-upload__preview');
+
+const smallerButton = document.querySelector('.scale__control--smaller');
+smallerButton.addEventListener('click', () => {
+  if (currentValue > 25) {
+    currentValue -= step;
+  }
+  updateScaleValue();
+});
+
+const biggerButton = document.querySelector('.scale__control--bigger');
+biggerButton.addEventListener('click', () => {
+  if (currentValue < 100) {
+    currentValue += step;
+  }
+  updateScaleValue();
+});
+
+function updateScaleValue() {
+  valueField.value = `${currentValue  }%`;
+  const scale = currentValue / 100;
+  previewImage.style.transform = `scale(${scale})`;
+}
+
+//применение эффекта к изображению
+const intensitySlider = document.getElementById('intensity-slider');
+
+noUiSlider.create(intensitySlider, {
+  start: 100,
+  range: {
+    'min': 0,
+    'max': 100
+  }
+});
+
+//изображение
+const targetImage = document.getElementById('target-image');
+
+//обработчик  для изменения эффекта
+document.querySelectorAll('.effects__radio').forEach((radio) => {
+  radio.addEventListener('change', function() {
+    const effect = this.value;
+    //применение выбранного эффекта и его интенсивности к изображению
+    applyEffect(effect, intensitySlider.noUiSlider.get());
+  });
+});
+
+//обработчик для изменения интенсивности
+intensitySlider.noUiSlider.on('update', (values, handle) => {
+  const selectedEffect = document.querySelector('.effects__radio:checked').value;
+  applyEffect(selectedEffect, values[handle]);
+});
+
+function applyEffect(effect, intensity) {
+  if (effect === 'heat') {
+    targetImage.style.filter = `brightness(${  intensity / 100 * 2  })`;
+  } else if (effect === 'chrome') {
+    targetImage.style.filter = `grayscale(${  intensity / 100  })`;
+  } else if (effect === 'sepia') {
+    targetImage.style.filter = `sepia(${  intensity / 100  })`;
+  } else if (effect === 'marvin') {
+    targetImage.style.filter = `invert(${  intensity  }%)`;
+  } else if (effect === 'phobos') {
+    targetImage.style.filter = `blur(${  intensity / 33  }px)`;
+  } else {
+    targetImage.style.filter = 'none';
+  }
+
+  document.querySelector('.effect-level__value').value = intensity;
+}
+
+//обработчик для скрытия слайдера и его контейнера при выборе "Оригинал"
+document.getElementById('effect-none').addEventListener('change', () => {
+  document.querySelector('.img-upload__effect-level').style.display = 'none';
+});
+
+//обработчик событий для отображения слайдера и его контейнера при выборе другого эффекта
+document.querySelectorAll('.effects__radio:not(#effect-none)').forEach((radio) => {
+  radio.addEventListener('change', () => {
+    document.querySelector('.img-upload__effect-level').style.display = 'block';
+  });
+});
