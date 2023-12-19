@@ -1,5 +1,6 @@
-import {generatePhotosArray} from './data.js';
+//import {generatePhotosArray} from './data.js';
 import { fullSizePicture } from './WindowFull-size.js';
+import { getData } from './remoteServerModule.js';
 
 // Функция для создания DOM-элементов изображений
 export const createPictureElement = (pictureData) => {
@@ -14,17 +15,25 @@ export const createPictureElement = (pictureData) => {
   return pictureClone;
 };
 
-export const renderPictures = () => {
-  const fragment = new DocumentFragment();
-  const picturesData = Array.from({ length: 25 }, () => generatePhotosArray());
-
-  picturesData.forEach((data) => {
-    const pictureElement = createPictureElement(data);
-    pictureElement.addEventListener('click', () => fullSizePicture(data));
-    fragment.appendChild(pictureElement);
-  });
-
-  document.querySelector('.pictures').appendChild(fragment);
+export const renderPictures = async () => {
+  try {
+    const picturesData = await getData();
+    const fragment = new DocumentFragment();
+    picturesData.forEach((data) => {
+      const pictureElement = createPictureElement(data);
+      pictureElement.addEventListener('click', () => fullSizePicture(data));
+      fragment.appendChild(pictureElement);
+    });
+    document.querySelector('.pictures').appendChild(fragment);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error rendering pictures:', error);
+    //обработка возможной ошибки запроса
+    const errorMessage = document.createElement('div');
+    errorMessage.textContent = 'Failed to load pictures from the server';
+    errorMessage.classList.add('error-message');
+    document.querySelector('.pictures').appendChild(errorMessage);
+  }
 };
 
 renderPictures();
