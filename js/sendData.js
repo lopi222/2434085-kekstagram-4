@@ -1,4 +1,5 @@
 import {sendDataToServer} from './remoteServerModule.js';
+import {renderPhotos} from './pictureThumbnailsRenderer.js';
 
 const handleFormErrors = (errorType, errorMessage) => {
   if (errorType === 'hashTagError') {
@@ -53,10 +54,9 @@ submitButton.addEventListener('click', async () => {
   const formData = new FormData(document.getElementById('yourFormId'));
   try {
     // eslint-disable-next-line no-unused-vars
-    const responseData = await sendDataToServer(formData); //подключение?
+    const responseData = await sendDataToServer(formData);
     resetFormAndClose();
     showSuccessMessage();
-    // Используем responseData для чего-то
   } catch (error) {
     if (error.type === 'formError') {
       handleFormErrors(error.errorType, error.errorMessage);
@@ -82,3 +82,64 @@ document.addEventListener('keydown', (event) => {
 });
 
 export {handleFormErrors, showSuccessMessage, showErrorMessage, closeMessages, resetFormAndClose};
+
+const data = []; // Массив фотографий, полученных с сервера
+
+// Функция для получения случайных фотографий
+function getRandomPhotos(count) {
+  const randomPhotos = [];
+  const copyPhotos = [...data]; // Копия массива фотографий
+
+  for(let i = 0; i < count; i++) {
+    const randomIndex = Math.floor(Math.random() * copyPhotos.length);
+    randomPhotos.push(copyPhotos[randomIndex]);
+    copyPhotos.splice(randomIndex, 1);
+  }
+
+  return randomPhotos;
+}
+
+// Функция для получения фотографий, отсортированных по количеству комментариев
+function getDiscussedPhotos() {
+  return data.sort((a, b) => b.comments.length - a.comments.length);
+}
+
+function removePhotos() {
+  const picturesContainer = document.querySelector('.pictures');
+  while (picturesContainer.firstChild) {
+    picturesContainer.removeChild(picturesContainer.firstChild);
+  }
+}
+
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+// Обработчик изменения фильтра
+export function handleFilterChange(filter) {
+  let filteredPhotos;
+
+  switch(filter) {
+    case 'default':
+      filteredPhotos = [...data];
+      break;
+    case 'random':
+      filteredPhotos = getRandomPhotos(10);
+      break;
+    case 'discussed':
+      filteredPhotos = getDiscussedPhotos();
+      break;
+    default:
+      filteredPhotos = [...data];
+  }
+
+  const debouncedHandleFilterChange = debounce(handleFilterChange, 500);
+  removePhotos(debouncedHandleFilterChange);
+  renderPhotos(filteredPhotos);
+}

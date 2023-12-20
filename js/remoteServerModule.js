@@ -5,6 +5,8 @@ const getData = async () => {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
+    // После загрузки изображений с сервера показываем блок .img-filters
+    document.querySelector('.img-filters').classList.remove('img-filters--inactive');
     return data;
   } catch (error) {
     // eslint-disable-next-line no-console
