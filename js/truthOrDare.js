@@ -1,3 +1,6 @@
+import Pristine from 'pristine';
+import noUiSlider from 'nouislider';
+
 const input = document.querySelector('.img-upload');
 const imagePreview = document.querySelector('.img-upload__preview');
 const effectsPreview = document.querySelectorAll('.img-upload__effects');
@@ -6,22 +9,28 @@ const slider = document.querySelector('.effect-level__value');
 const textComment = document.querySelector('.text__description');
 const hashtags = document.querySelector('.text__hashtags');
 
-input.addEventListener('change', () => {
-  const file = input.files0;
+document.getElementById('image-input').addEventListener('change', (event) => {
+  const file = event.target.files[0];
+  const image = document.getElementById('image-preview');
+
   const reader = new FileReader();
-
   reader.onload = function(e) {
-    const imageUrl = e.target.result;
-    imagePreview.src = imageUrl;
-    effectsPreview.forEach((preview) => {
-      preview.style.backgroundImage = `url(${imageUrl})`;
-    });
+    image.src = e.target.result;
   };
-
   reader.readAsDataURL(file);
+});
+
+// Функция для обработки события отправки формы
+document.getElementById('image-upload-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const file = document.getElementById('image-input').files[0];
+
+  // Создание формы для отправки на сервер
+  const formData = new FormData();
+  formData.append('image', file);
 
   // Показываем форму редактирования изображения
-  const overlay = document.querySelector('.img-uploadoverlay');
+  const overlay = document.querySelector('.img-upload');
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
 });
@@ -127,6 +136,7 @@ noUiSlider.create(intensitySlider, {
 
 //изображение
 const targetImage = document.getElementById('target-image');
+const checkedRadio = document.querySelector('.effects__radio:checked');
 
 //обработчик  для изменения эффекта
 document.querySelectorAll('.effects__radio').forEach((radio) => {
@@ -172,3 +182,5 @@ document.querySelectorAll('.effects__radio:not(#effect-none)').forEach((radio) =
     document.querySelector('.img-upload__effect-level').style.display = 'block';
   });
 });
+
+export { targetImage, checkedRadio, applyEffect };
