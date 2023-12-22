@@ -1,8 +1,6 @@
-// eslint-disable-next-line no-unused-vars
 function checkStringLength(str, maxLength) {
   return str.length <= maxLength;
 }
-// eslint-disable-next-line no-console
 console.log(checkStringLength('проверяемая строка'));
 
 function checkPalindrome(str) {
@@ -18,5 +16,4 @@ function checkPalindrome(str) {
   return false;
 }
 
-// eslint-disable-next-line no-console
 console.log(checkPalindrome('топор'));

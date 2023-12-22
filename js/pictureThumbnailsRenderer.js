@@ -1,4 +1,3 @@
-//import {generatePhotosArray} from './data.js';
 import { fullSizePicture } from './WindowFull-size.js';
 import { getData } from './remoteServerModule.js';
 
@@ -26,8 +25,6 @@ export const renderPictures = async () => {
     });
     document.querySelector('.pictures').appendChild(fragment);
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Error rendering pictures:', error);
     //обработка возможной ошибки запроса
     const errorMessage = document.createElement('div');
     errorMessage.textContent = 'Failed to load pictures from the server';

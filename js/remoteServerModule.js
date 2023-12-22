@@ -9,7 +9,6 @@ const getData = async () => {
     document.querySelector('.img-filters').classList.remove('img-filters--inactive');
     return data;
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Error fetching data:', error);
     throw error;
   }
@@ -27,7 +26,6 @@ const sendDataToServer = async (formData) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Error sending data:', error);
     throw { type: 'sendError', error: error };
   }

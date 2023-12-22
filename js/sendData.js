@@ -53,7 +53,6 @@ submitButton.addEventListener('click', async () => {
   submitButton.disabled = true; // Disable submit button during data submission
   const formData = new FormData(document.getElementById('yourFormId'));
   try {
-    // eslint-disable-next-line no-unused-vars
     const responseData = await sendDataToServer(formData);
     resetFormAndClose();
     showSuccessMessage();
