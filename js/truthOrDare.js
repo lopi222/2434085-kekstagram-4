@@ -61,13 +61,11 @@ slider.addEventListener('input', () => {
 
 // Добавление текстового комментария
 textComment.addEventListener('input', () => {
-  // eslint-disable-next-line no-unused-vars
   const comment = textComment.value;
 });
 
 // Добавление хэш-тегов
 hashtags.addEventListener('input', () => {
-  // eslint-disable-next-line no-unused-vars
   const tags = hashtags.value.split(' ');
 });
 
