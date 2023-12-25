@@ -16,19 +16,19 @@ const handleFormErrors = (errorType, errorMessage) => {
   }
 };
 
-// Функция для показа сообщения об успешной отправке данных
+//Функция для показа сообщения об успешной отправке данных
 const showSuccessMessage = () => {
   const successMessage = document.getElementById('success-message');
   successMessage.style.display = 'block';
 };
 
-// Функция для показа сообщения об ошибке отправки данных
+//Функция для показа сообщения об ошибке отправки данных
 const showErrorMessage = () => {
   const errorMessage = document.getElementById('error-message');
   errorMessage.style.display = 'block';
 };
 
-// Функция для закрытия сообщений после успешной отправки или ошибки
+//Функция для закрытия сообщений после успешной отправки или ошибки
 const closeMessages = () => {
   const successMessage = document.getElementById('success-message');
   const errorMessage = document.getElementById('error-message');
@@ -36,18 +36,18 @@ const closeMessages = () => {
   errorMessage.style.display = 'none';
 };
 
-// Функция для сброса состояния формы и закрытия
+//Функция для сброса состояния формы и закрытия
 const resetFormAndClose = () => {
   const scaleInput = document.getElementById('scaleInput');
   scaleInput.value = 100;
   closeMessages();
 };
 
-// Нажатие на кнопку .img-upload__cancel
+//Нажатие на кнопку .img-upload__cancel
 const cancelButton = document.querySelector('.img-upload__cancel');
 cancelButton.addEventListener('click', resetFormAndClose);
 
-// Обработка запроса на отправку данных
+//Обработка запроса на отправку данных
 const submitButton = document.getElementById('submit-btn');
 submitButton.addEventListener('click', async () => {
   submitButton.disabled = true; // Disable submit button during data submission
@@ -67,13 +67,13 @@ submitButton.addEventListener('click', async () => {
   }
 });
 
-// Обработчики закрытия сообщений
+//Обработчики закрытия сообщений
 const successButton = document.querySelector('.success__button');
 const errorButton = document.querySelector('.error__button');
 successButton.addEventListener('click', closeMessages);
 errorButton.addEventListener('click', closeMessages);
 
-// Обработчики для закрытия сообщений по нажатию клавиши Esc
+//Обработчики для закрытия сообщений по нажатию клавиши Esc
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     closeMessages();
@@ -82,7 +82,7 @@ document.addEventListener('keydown', (event) => {
 
 export {handleFormErrors, showSuccessMessage, showErrorMessage, closeMessages, resetFormAndClose};
 
-const data = []; // Массив фотографий, полученных с сервера
+const data = []; //Массив фотографий, полученных с сервера
 
 // Функция для получения случайных фотографий
 function getRandomPhotos(count) {
