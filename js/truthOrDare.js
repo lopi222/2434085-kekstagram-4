@@ -1,6 +1,3 @@
-import Pristine from 'pristine';
-import noUiSlider from 'nouislider';
-
 const input = document.querySelector('.img-upload');
 const imagePreview = document.querySelector('.img-upload__preview');
 const effectsPreview = document.querySelectorAll('.img-upload__effects');
